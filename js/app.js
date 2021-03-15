@@ -93,7 +93,7 @@ function render() {
 
 productsSection.addEventListener('click', clickHandler);
 
-let trials = 5;
+let trials = 25;
 
 function clickHandler(event) {
     trials -= 1;
@@ -107,6 +107,57 @@ function clickHandler(event) {
     }
     if (trials === 0) {
         productsSection.removeEventListener('click', clickHandler);
+        alert('Thank you for sharing your opinion see the results below')
+        chartFun();
     }
 }
+
+// ---------- Building the chart
+function chartFun() {
+
+    let context = document.getElementById('productsChart');
+    let votesArray = [];
+    let viewsArray = [];
+    for (let i = 0; i < product.array.length; i++) {
+        votesArray.push(product.array[i].votes);
+        viewsArray.push(product.array[i].views);
+    }
+
+    let chartObject = {
+
+        type: 'bar',
+        data: {
+            labels: productsName,
+            datasets: [{
+                label: 'Views',
+                data: viewsArray,
+                backgroundColor: 'blue',
+                borderColor: 'white',
+                hoverBackgroundColor: 'white',
+                // hoverBorderWidth:2,
+                // borderWidth: 1
+            },
+            {
+                label: 'Votes',
+                data: votesArray,
+                backgroundColor: 'yellow',
+                borderColor: 'black',
+                hoverBackgroundColor: 'black',
+                // hoverBorderWidth:5,
+                // borderWidth: 1
+            }
+            ]
+        },
+        Option: {
+            xAxis: {
+                scale: {
+                    range: { min: 0, max: 100, padding: 0 }
+                }
+            }
+        },
+    };
+    let theChart = new Chart(context, chartObject, { scaleFontColor: "black"});
+}
+
 render();
+
