@@ -93,7 +93,7 @@ function render() {
 
 productsSection.addEventListener('click', clickHandler);
 
-let trials = 5;
+let trials = 25;
 
 function clickHandler(event) {
     trials -= 1;
@@ -107,6 +107,7 @@ function clickHandler(event) {
     }
     if (trials === 0) {
         productsSection.removeEventListener('click', clickHandler);
+        alert('Thank you for sharing your opinion see the results below')
         chartFun();
     }
 }
