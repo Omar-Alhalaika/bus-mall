@@ -23,6 +23,33 @@ function product(name, ext) {
 }
 product.array = [];
 
+// ---------- Save and update local storge
+function updateLocalStorge() {
+    let stringedArray = JSON.stringify(product.array);
+    localStorage.setItem('votesAndViwes', stringedArray);
+    // console.log(stringedArray)
+
+}
+
+// ---------- Parse local storge
+function parseLocalStorge() {
+    let getData = localStorage.getItem('votesAndViwes');
+    let parseData = JSON.parse(getData);
+    console.log(parseData);
+    if (parseData == null) {
+        console.log(parseData);
+        parseData = product.array;
+
+
+    }
+    for (let i = 0; i < parseData.length; i++) {
+        product.array[i].votes = parseData[i].votes;
+        product.array[i].views = parseData[i].views;
+    }
+    render();
+
+}
+
 // ---------- For loop to creat instant objects
 
 for (let i = 0; i < productsName.length; i++) {
@@ -47,9 +74,10 @@ function randomNumber(min, max) {
 
 let showenProducts = [];
 function render() {
+    updateLocalStorge();
 
-    // ---------- we're using DO WHILE to apply the stetments then check the condition & if it's false it'll do the stetments again
-    // ---------- and notice that we declare let as an empty var the use it inside the Do While!
+    // ---------- we're using DO WHILE to run the stetments then check the condition & if it's false it'll do the stetments again
+    // ---------- and notice that we declare let as an empty vars to use it inside the Do While!
     let firstIndex;
     let secondIndex;
     let thirdIndex;
@@ -93,7 +121,7 @@ function render() {
 
 productsSection.addEventListener('click', clickHandler);
 
-let trials = 25;
+let trials = 5;
 
 function clickHandler(event) {
     trials -= 1;
@@ -103,6 +131,7 @@ function clickHandler(event) {
                 product.array[i].votes++;
             }
         }
+        // call render fun. to update previous rounds
         render();
     }
     if (trials === 0) {
@@ -148,7 +177,31 @@ function chartFun() {
             }
             ]
         },
-        Option: {
+        options: {
+            legend: {
+                labels: {
+                    fontColor: "black",
+                    fontSize: 18
+                }
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        fontColor: "black",
+                        fontSize: 12,
+                        stepSize: 1,
+                        beginAtZero: true
+                    }
+                }],
+                xAxes: [{
+                    ticks: {
+                        fontColor: "black",
+                        fontSize: 14,
+                        stepSize: 1,
+                        beginAtZero: true
+                    }
+                }]
+            },
             xAxis: {
                 scale: {
                     range: { min: 0, max: 100, padding: 0 }
@@ -156,8 +209,9 @@ function chartFun() {
             }
         },
     };
-    let theChart = new Chart(context, chartObject, { scaleFontColor: "black"});
+    let theChart = new Chart(context, chartObject, { scaleFontColor: "black" });
 }
 
-render();
+// render();
+parseLocalStorge();
 
