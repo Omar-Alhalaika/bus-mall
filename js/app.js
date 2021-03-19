@@ -22,6 +22,7 @@ function product(name, ext) {
     product.array.push(this);
 }
 product.array = [];
+console.log(product.array)
 
 // ---------- Save and update local storge
 function updateLocalStorge() {
@@ -47,6 +48,7 @@ function parseLocalStorge() {
         product.array[i].views = parseData[i].views;
     }
     render();
+    chartFun();
 
 }
 
