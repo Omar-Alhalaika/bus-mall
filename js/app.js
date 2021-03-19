@@ -123,7 +123,7 @@ function render() {
 
 productsSection.addEventListener('click', clickHandler);
 
-let trials = 5;
+let trials = 25;
 
 function clickHandler(event) {
     trials -= 1;
