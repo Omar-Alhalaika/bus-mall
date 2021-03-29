@@ -8,4 +8,7 @@
 * MIT License
 * reset.css cridet to [here](http://meyerweb.com/eric/tools/css/reset/ )
 
->You can find me on [GitHub](https://github.com/Omar-Alhalaika)
+>You can find me on:
+
+* [GitHub](https://github.com/Omar-Alhalaika)
+* [LinkedIn](https://www.linkedin.com/in/omar-alhalaika)
